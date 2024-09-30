@@ -1,9 +1,9 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { SimpleForm } from "./components/useEffect/02-useEffect.jsx";
+import { FormHook } from "./components/useEffect/FormCustomHook.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <SimpleForm />
+    <FormHook />
   </StrictMode>
 );
