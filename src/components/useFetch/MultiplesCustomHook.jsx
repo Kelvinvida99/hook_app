@@ -5,7 +5,7 @@ export const MultiplesCustomHook = () => {
 
   return (
     <div>
-      <p>Informacion de Gonfig</p>
+      <p>Informacion de Pokemon</p>
 
       {isLoading && <h4>Cargando...</h4>}
 
