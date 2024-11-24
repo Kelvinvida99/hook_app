@@ -1,4 +1,6 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+
+const localCache = {};
 
 export const useFetch = (url) => {
   const [state, setState] = useState({
@@ -8,12 +10,22 @@ export const useFetch = (url) => {
     error: null,
   });
 
-  useEffect(() => {
-    getPokemon(url);
-  }, [url]);
+  const getPokemon = useCallback(async (url) => {
+    if (localCache[url]) {
+      setState({
+        data: localCache[url],
+        isLoading: false,
+        hasError: false,
+        error: null,
+      });
+      return;
+    }
 
-  const getPokemon = async (url) => {
+    setLoadingState();
     const resp = await fetch(url);
+
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+
     const data = await resp.json();
 
     if (!resp.ok) {
@@ -26,7 +38,6 @@ export const useFetch = (url) => {
           message: resp.statusText,
         },
       });
-
       return;
     }
 
@@ -36,12 +47,29 @@ export const useFetch = (url) => {
       hasError: false,
       error: null,
     });
+
+    localCache[url] = data;
+  }, []);
+
+  const setLoadingState = () => {
+    setState({
+      data: null,
+      isLoading: true,
+      hasError: false,
+      error: null,
+    });
   };
+
+  useEffect(() => {
+    if (url) {
+      getPokemon(url);
+    }
+  }, [getPokemon, url]);
 
   return {
     data: state.data,
-    isLoading: false,
-    hasError: false,
-    error: null,
+    isLoading: state.isLoading,
+    hasError: state.hasError,
+    error: state.error,
   };
 };
