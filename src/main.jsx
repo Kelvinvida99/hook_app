@@ -1,11 +1,17 @@
-import { StrictMode } from "react";
+/* import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { Memorize } from "./components/memos/Memorize.jsx";
+import { Padre } from "./components/07-tarea-memo/Padre.jsx"; */
+//import { CallBackHook } from "./components/memos/CallBackHook.jsx";
+//import { MemoHook } from "./components/memos/MemoHook.jsx";
+//import { Memorize } from "./components/memos/Memorize.jsx";
 //import { MultiplesCustomHook } from "./components/useFetch/MultiplesCustomHook.jsx";
 //import { FocusScreen } from "./components/04-useRef/FocusScreen.jsx";
 
-createRoot(document.getElementById("root")).render(
+import "./components/08-useReducer/intro-reducer"
+
+/* createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <Memorize />
+    <Padre />
   </StrictMode>
 );
+ */
