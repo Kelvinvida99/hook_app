@@ -1,17 +1,17 @@
 import PropTypes from "prop-types";
 import { TodoItem } from "./TodoItem";
 
-/* const init = [{
-  id: new Date().getTime(),
-  description: "descubir la piedra filosofal",
-  done: false,
-}] */
+export const TodoList = ({ todos = [], onDelete, toggleTodo }) => {
 
-export const TodoList = ({ todos = [] }) => {
+
+  if (!Array.isArray(todos) || todos.length === 0) {
+    return <p>No hay tareas disponibles</p>;
+  }
+
   return (
     <ul className="list-group">
-      {(todos || []).map((todo) => (
-        <TodoItem key={todo.id} todo={todo} />
+      {(todos || []).map((todo, index) => (
+        <TodoItem key={index} todo={todo} onDelete={onDelete} toggleTodo={toggleTodo} />
       ))}
     </ul>
   );
@@ -19,4 +19,6 @@ export const TodoList = ({ todos = [] }) => {
 
 TodoList.propTypes = {
   todos: PropTypes.array,
+  onDelete: PropTypes.func,
+  toggleTodo: PropTypes.func,
 };
